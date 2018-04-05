@@ -16,7 +16,7 @@ public class Main {
 		String patern=null;
                 BufferedReader br=null;
                 try{
-                    FileInputStream fstream = new FileInputStream("packetSize_H1.txt");
+                    FileInputStream fstream = new FileInputStream("packetSize_H210.txt");
               br = new BufferedReader(new InputStreamReader(fstream));
                
                 }
@@ -34,8 +34,9 @@ while ((strLine = br.readLine()) != null)   {
     nbClients=Integer.parseInt(res[0]);
     nbPackets=Integer.parseInt(res[1]);
      delay=Integer.parseInt(res[2]);
-     
+     System.out.println("CSMA/CD");
      Execute(nbClients,nbPackets,delay, "CSMA/CD");
+      System.out.println("CSMA/CA");
      Execute(nbClients,nbPackets,delay, "CSMA/CA");
 }
 

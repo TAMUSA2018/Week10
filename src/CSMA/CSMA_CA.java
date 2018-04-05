@@ -1,4 +1,6 @@
 package CSMA;
+import static CSMA.CSMA_CD.faillures;
+import static CSMA.CSMA_CD.totalCollisions;
 import java.lang.Thread;
 
 
@@ -17,16 +19,16 @@ public class CSMA_CA extends Thread {
 		this.id = idHost;
 		this.packetToSent = id;
 		delay = (2 * packetToSent) * 100;
-		System.out.println("New CLIENT : ");
-		System.out.println("Name : " + this.name);
-		System.out.println("ID : " + this.id);
+	//	System.out.println("New CLIENT : ");
+	//	System.out.println("Name : " + this.name);
+	//	System.out.println("ID : " + this.id);
 	}
 	
 	  public  void sendPacket(int nbPacket) {
-		  System.out.println(this.name + " Transmit packet " + nbPacket);
+	//	  System.out.println(this.name + " Transmit packet " + nbPacket);
 		  if (nbPacket == this.id){
 			state = 0;
-			System.out.println("[Recepteur][ACK] Acknowledgement. Transmission ending for " + this.name + "\n");
+			//System.out.println("[Recepteur][ACK] Acknowledgement. Transmission ending for " + this.name + "\n");
 		  }
 	   }
 	  
@@ -40,25 +42,25 @@ public class CSMA_CA extends Thread {
 					key = this.name;
 					state = 1;
 					if (key == this.name){
-						System.out.println(this.name + "[RTS] Ready To send" + "[DATA:[Number of packets : " + this.packetToSent + "]]");
+			//			System.out.println(this.name + "[RTS] Ready To send" + "[DATA:[Number of packets : " + this.packetToSent + "]]");
 						//Here normaly the server determin the sleep delay for all other hosts
-						System.out.println("[Recepteur][CTS] Clear To send " + this.packetToSent + "packets" + " From" + this.name);
+			//			System.out.println("[Recepteur][CTS] Clear To send " + this.packetToSent + "packets" + " From" + this.name);
 						packetNb += 1;
 						this.packetToSent -= 1;
-						System.out.println(this.name + " send packet number : " + packetNb);
+					//	System.out.println(this.name + " send packet number : " + packetNb);
 					}
 				} else if (state == 1 && key == this.name){
 					this.packetToSent -= 1;
 					packetNb += 1;
-					System.out.println(this.name + " send packet number : " + packetNb);
+				//	System.out.println(this.name + " send packet number : " + packetNb);
 					if (this.packetToSent == 0){
-						System.out.println("[Recepteur][ACK] acknowledgment. Transmission ending for " + this.name);
+			//			System.out.println("[Recepteur][ACK] acknowledgment. Transmission ending for " + this.name);
 						state = 0;
 						key = "";
 					}
 				} else {
 					try	{
-						System.out.println(this.name + "Waiting");
+			//			System.out.println(this.name + "Waiting");
 						Thread.sleep(delay);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -66,6 +68,9 @@ public class CSMA_CA extends Thread {
 				}
 			}
 		}
-		System.out.println(this.name + "STOP \n");
+		//System.out.println(this.name + "STOP \n");
+                System.out.println(name + " All packet send ! with success");
+		System.out.println(" CSMA_CA Nb Total of collisions : "  + totalCollisions);
+		System.out.println(" CSMA_CA Nb total of faillure : " + faillures);
 	}
 }

@@ -23,10 +23,10 @@ public class CSMA_CD extends Thread {
 		this.name = name;
 		this.id = idHost;
 		this.delay = propDelay;
-		System.out.println("New CLIENT : ");
-		System.out.println("Name : " + this.name);
-		System.out.println("ID : " + this.id);
-		System.out.println("Delay : " + this.delay);
+	//	System.out.println("New CLIENT : ");
+	//	System.out.println("Name : " + this.name);
+	//	System.out.println("ID : " + this.id);
+		System.out.println("Delay  CSMA_CD : " + this.delay);
 	}
 	
 	void goChrono() { 
@@ -36,7 +36,7 @@ public class CSMA_CD extends Thread {
 	void stopChrono(){
 		long timeChrono2 = java.lang.System.currentTimeMillis();
 		timeChrono = timeChrono2 - timeChrono;
-		System.out.println(name + " Delay " + timeChrono + " ms");
+		System.out.println(name + " Delay  CSMA_CD " + timeChrono + " ms");
 	}
 	
 	public void run() {
@@ -45,10 +45,10 @@ public class CSMA_CD extends Thread {
 			countCollisions = 0;
 			while (countCollisions < 10) {
 				if (state == 0) {
-					System.out.println(name + " is state 0");
+				//	System.out.println(name + " is state 0");
 					try {
 						Thread.sleep(delay);
-						System.out.println(name + " Enter in sleep mode for " + delay);
+					//	System.out.println(name + " Enter in sleep mode for " + delay);
 					} catch (InterruptedException e) {
 						System.err.println("Inturrupted: Interrupt exception");
 					}
@@ -60,23 +60,23 @@ public class CSMA_CD extends Thread {
 					System.err.println("Inturrupted: Interrupt exception");
 				}
 				if (state == 1){
-					System.out.println(name + " is state 1");
-					System.out.println(name + " Packet no" + packetNumber + " sent with success");
+				//	System.out.println(name + " is state 1");
+				//	System.out.println(name + " Packet no" + packetNumber + " sent with success");
 					state = 0;
 					break;
 				}
 				if (state >= 2) {
-					System.out.println(name + " is state 2");
+				//	System.out.println(name + " is state 2");
 					countCollisions++;
 					totalCollisions++;
-					System.out.println(name + " Packet no" + packetNumber + " Collision!");
+				//	System.out.println(name + " Packet no" + packetNumber + " Collision!");
 					state = 0;
 					try {
 						//Set a timer depending of how many collisions packet enconter
 						Timer timer = new Timer();
 						int sleepingTimeRandom = (2* delay * timer.randomSleepTime(countCollisions));
 						Thread.sleep(sleepingTimeRandom);
-						System.out.println(name + " Enter in sleeping mode, depend of number of collisions for " + sleepingTimeRandom);
+					//	System.out.println(name + " Enter in sleeping mode, depend of number of collisions for " + sleepingTimeRandom);
 					} catch (InterruptedException e) {
 						System.err.println("Inturrupted: Interrupt exception");
 					}
@@ -84,14 +84,14 @@ public class CSMA_CD extends Thread {
 				}
 			}
 			if (countCollisions >= 10){
-				System.out.println("Host computer[" + name + "]Packet " + packetNumber + " transmission failure.");
+				System.out.println("  CSMA_CD Host computer[" + name + "]Packet " + packetNumber + " transmission failure.");
 				faillures++;
 			}
 		}
 		stopChrono();
 		System.out.println(name + " All packet send ! with success");
-		System.out.println("Nb Total of collisions : "  + totalCollisions);
-		System.out.println("Nb total of faillure : " + faillures);
+		System.out.println(" CSMA_CD Nb Total of collisions : "  + totalCollisions);
+		System.out.println(" CSMA_CD Nb total of faillure : " + faillures);
 	}
 	
 }
