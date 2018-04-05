@@ -22,6 +22,7 @@ public class CSMA_CA extends Thread {
 	//	System.out.println("New CLIENT : ");
 	//	System.out.println("Name : " + this.name);
 	//	System.out.println("ID : " + this.id);
+        System.out.println("Delay  CSMA_CA : " + this.delay);
 	}
 	
 	  public  void sendPacket(int nbPacket) {
